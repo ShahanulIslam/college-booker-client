@@ -1,9 +1,46 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
+    const { signIn, googleLogin } = useContext(AuthContext);
+
+    const handleLogin = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        signIn(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                toast.success("User logged in successfully!!");
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const createdUser = result.user;
+                console.log(createdUser);
+                toast.success("User logged in successfully!!");
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
+
+    }
+
     return (
         <>
+            <ToastContainer></ToastContainer>
             <div className="py-6">
                 <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <div
@@ -39,9 +76,7 @@ const Login = () => {
                                     />
                                 </svg>
                             </div>
-                            <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">
-                                Sign in with Google
-                            </h1>
+                            <button className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold" onClick={handleGoogleLogin}>Sign in with Google</button>
                         </a>
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 lg:w-1/4" />
@@ -50,35 +85,34 @@ const Login = () => {
                             </a>
                             <span className="border-b w-1/5 lg:w-1/4" />
                         </div>
-                        <div className="mt-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Email Address
-                            </label>
-                            <input
-                                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="email"
-                            />
-                        </div>
-                        <div className="mt-4">
-                            <div className="flex justify-between">
+                        <form onSubmit={handleLogin}>
+                            <div className="mt-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                                    Password
+                                    Email Address
                                 </label>
-                                <a href="#" className="text-xs text-gray-500">
-                                    Forget Password?
-                                </a>
+                                <input
+                                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                                    type="email" name="email"
+                                />
                             </div>
-                            <input
-                                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="password"
-                            />
-                        </div>
-                        <div className="mt-8">
-                            <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
-                                Login
-                            </button>
-
-                        </div>
+                            <div className="mt-4">
+                                <div className="flex justify-between">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                        Password
+                                    </label>
+                                    <a href="#" className="text-xs text-gray-500">
+                                        Forget Password?
+                                    </a>
+                                </div>
+                                <input
+                                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                                    type="password" name="password"
+                                />
+                            </div>
+                            <div className="mt-8">
+                                <input className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" type="submit" value="Login" />
+                            </div>
+                        </form>
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 md:w-1/4" />
                             <Link className="text-xs text-gray-500 uppercase" to="/register">Or Register</Link>

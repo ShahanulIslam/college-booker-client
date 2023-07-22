@@ -1,9 +1,61 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
+
+
+    const { createUser,googleLogin } = useContext(AuthContext)
+
+    const handleRegister = event => {
+        event.preventDefault()
+        const form = event.target;
+        const displayName = form.name.value;
+        const photoUrl = form.photoUrl.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(displayName,photoUrl,email,password);
+        createUser(email, password, displayName, photoUrl)
+            .then((result) => {
+                const loggedUser = result.user;
+                return updateProfile(loggedUser, {
+                    displayName: displayName,
+                    photoURL: photoUrl,
+                })
+                .then(() => {
+                    console.log(loggedUser);
+                    toast.success("User registered successfully")
+                    form.reset();
+                });
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    }
+
+    
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const createdUser = result.user;
+                console.log(createdUser);
+                toast.success("User logged in successfully!!");
+            })
+            .catch(error => {
+                toast.error(error.message);
+            })
+
+    }
+
+
+
     return (
         <>
+        <ToastContainer></ToastContainer>
             <div className="py-6">
                 <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <div
@@ -39,9 +91,7 @@ const Register = () => {
                                     />
                                 </svg>
                             </div>
-                            <h1 className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">
-                                Sign in with Google
-                            </h1>
+                            <button className="px-4 py-3 w-5/6 text-center text-gray-600 font-bold" onClick={handleGoogleLogin}>Sign in with Google</button>
                         </a>
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 lg:w-1/4" />
@@ -50,49 +100,50 @@ const Register = () => {
                             </a>
                             <span className="border-b w-1/5 lg:w-1/4" />
                         </div>
-                        <div className="mt-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Name
-                            </label>
-                            <input
-                                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="name"
-                            />
-                        </div>
-                        <div className="mt-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                               Photo Url
-                            </label>
-                            <input
-                                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="photoUrl"
-                            />
-                        </div>
-                        <div className="mt-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Email Address
-                            </label>
-                            <input
-                                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="email"
-                            />
-                        </div>
-                        <div className="mt-4">
-                            <div className="flex justify-between">
+                        <form onSubmit={handleRegister}>
+                            <div className="mt-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                                    Password
+                                    Name
                                 </label>
+                                <input
+                                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                                    type="name" name="name"
+                                />
                             </div>
-                            <input
-                                className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                type="password"
-                            />
-                        </div>
-                        <div className="mt-8">
-                            <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">
-                                Register
-                            </button>
-                        </div>
+                            <div className="mt-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Photo Url
+                                </label>
+                                <input
+                                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                                    type="text" name="photoUrl"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    Email Address
+                                </label>
+                                <input
+                                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                                    type="email" name="email"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <div className="flex justify-between">
+                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                        Password
+                                    </label>
+                                </div>
+                                <input
+                                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                                    type="password" name="password"
+                                />
+                            </div>
+                            <div className="mt-8">
+                                <input className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" type="submit" value="Register" />
+                            </div>
+                        </form>
+
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 md:w-1/4" />
                             <Link className="text-xs text-gray-500 uppercase" to="/login">Or Login</Link>
