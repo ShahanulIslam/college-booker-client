@@ -1,9 +1,12 @@
+import Banner from "../Banner/Banner";
+import CollegeCard from "../CollegeCard/CollegeCard";
 
 
 const Home = () => {
     return (
         <div>
-            <h2>This is Home</h2>
+            <Banner></Banner>
+            <CollegeCard></CollegeCard>
         </div>
     );
 };

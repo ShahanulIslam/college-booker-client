@@ -143,7 +143,6 @@ const Register = () => {
                                 <input className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" type="submit" value="Register" />
                             </div>
                         </form>
-
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 md:w-1/4" />
                             <Link className="text-xs text-gray-500 uppercase" to="/login">Or Login</Link>
