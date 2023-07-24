@@ -1,12 +1,12 @@
-import React from 'react';
+
 import { useLoaderData } from 'react-router-dom';
 
 const CardDetails = () => {
     const data = useLoaderData();
 
-    if (!data) {
-        return <div>Loading...</div>;
-    }
+    // if (!data) {
+    //     return <div>Loading...</div>;
+    // }
 
     const { college_image, college_name, admission_dates, admission_process, research_history, events, sports_categories } = data;
 

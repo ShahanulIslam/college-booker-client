@@ -14,7 +14,7 @@ const Navbar = () => {
     const navItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/colleges">Colleges</Link></li>
-        <li><Link to="/">Admission</Link></li>
+        <li><Link to="/admission">Admission</Link></li>
         <li><Link to="/">MyCollege</Link></li>
     </>
     return (
@@ -43,9 +43,9 @@ const Navbar = () => {
                     {user ?
                         <div className='flex gap-2 md:gap-4'>
                             <img title={user.displayName} className='rounded-full w-11 h-11' src={user.photoURL} alt="" />
-                            <button onClick={handleLogOut} className='btn bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4'>Logout</button>
+                            <button onClick={handleLogOut} className='btn bg-[#95a9c2] text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4'>Logout</button>
                         </div> :
-                        <Link to='/login' className="btn bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4">Login</Link>
+                        <Link to='/login' className="btn bg-[#95a9c2] text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4">Login</Link>
                     }
                 </div>
             </div>

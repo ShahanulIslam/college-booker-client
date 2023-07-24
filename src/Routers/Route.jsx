@@ -6,7 +6,8 @@ import Login from "../Pages/Login/Login";
 import NotFound from "../Pages/NotFound/NotFound";
 import CardDetails from "../Pages/Home/CardDetails/CardDetails";
 import College from "../Pages/Colleges/Colleges";
-import CollegeDetails from "../Pages/CollegeDetails/CollegeDetails";
+import Admission from "../Pages/Admission/Admission";
+import CollegeList from "../Pages/Admission/CollegeList";
 
 export const router = createBrowserRouter([
   {
@@ -26,14 +27,25 @@ export const router = createBrowserRouter([
       },
       {
         path: "/collegeDetails/:id",
-        element:<CollegeDetails></CollegeDetails> ,
-        loader:({params}) => fetch(`http://localhost:3500/data/${params.id}`)
+        element: <CardDetails></CardDetails>,
+        loader: ({ params }) => fetch(`http://localhost:3500/data/${params.id}`)
       },
       {
         path: "/cardDetails/:id",
         element: <CardDetails></CardDetails>,
-        loader:({params}) => fetch(`http://localhost:3500/collegedata/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:3500/collegedata/${params.id}`)
       },
+      {
+        path: "/admission",
+        element: <CollegeList></CollegeList>,
+        loader: () => fetch("http://localhost:3500/data")
+      },
+      {
+        path: "/admission/:id",
+        element: <Admission></Admission>
+      },
+
+      // <Route path="/admission/:id" component={AdmissionForm} />
       {
         path: "/login",
         element: <Login></Login>
