@@ -39,7 +39,7 @@ const CardDetails = () => {
                     </ul>
 
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Visit College Website</button>
+                        <button className="btn bg-[#95a9c2]">Visit College Website</button>
                     </div>
                 </div>
             </div>

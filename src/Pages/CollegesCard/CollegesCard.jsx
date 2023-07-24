@@ -15,7 +15,7 @@ const CollegesCard = ({ college }) => {
         <p>Admission Dates: {admission_dates}</p>
         <p>Research Count: {research_count}</p>
         <div className="card-actions justify-end">
-          <Link to={`/collegeDetails/${_id}`} className="btn btn-primary">
+          <Link to={`/collegeDetails/${_id}`} className="btn bg-[#95a9c2]">
             Details
           </Link>
         </div>
