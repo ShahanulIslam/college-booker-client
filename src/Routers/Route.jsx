@@ -44,8 +44,6 @@ export const router = createBrowserRouter([
         path: "/admission/:id",
         element: <Admission></Admission>
       },
-
-      // <Route path="/admission/:id" component={AdmissionForm} />
       {
         path: "/login",
         element: <Login></Login>

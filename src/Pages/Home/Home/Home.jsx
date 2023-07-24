@@ -1,6 +1,7 @@
 import Banner from "../Banner/Banner";
 import CollegeCard from "../CollegeCard/CollegeCard";
 import Gallery from "../Gallery/Gallery";
+import Review from "../Review/Review";
 
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
             <Banner></Banner>
             <CollegeCard></CollegeCard>
             <Gallery></Gallery>
+            <Review></Review>
         </div>
     );
 };
