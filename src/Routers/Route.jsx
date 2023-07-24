@@ -18,27 +18,27 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:3500/collegedata")
+        loader: () => fetch("https://college-booker-server-ochre.vercel.app/collegedata")
       },
       {
         path: "/colleges",
         element: <College></College>,
-        loader: () => fetch("http://localhost:3500/data")
+        loader: () => fetch("https://college-booker-server-ochre.vercel.app/data")
       },
       {
         path: "/collegeDetails/:id",
         element: <CardDetails></CardDetails>,
-        loader: ({ params }) => fetch(`http://localhost:3500/data/${params.id}`)
+        loader: ({ params }) => fetch(`https://college-booker-server-ochre.vercel.app/data/${params.id}`)
       },
       {
         path: "/cardDetails/:id",
         element: <CardDetails></CardDetails>,
-        loader: ({ params }) => fetch(`http://localhost:3500/collegedata/${params.id}`)
+        loader: ({ params }) => fetch(`https://college-booker-server-ochre.vercel.app/collegedata/${params.id}`)
       },
       {
         path: "/admission",
         element: <CollegeList></CollegeList>,
-        loader: () => fetch("http://localhost:3500/data")
+        loader: () => fetch("https://college-booker-server-ochre.vercel.app/data")
       },
       {
         path: "/admission/:id",

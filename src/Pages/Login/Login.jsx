@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const { signIn, googleLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogin = event => {
         event.preventDefault();
@@ -19,6 +20,7 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 toast.success("User logged in successfully!!");
+                navigate("/")
             })
             .catch(error => {
                 toast.error(error.message);
@@ -31,6 +33,7 @@ const Login = () => {
                 const createdUser = result.user;
                 console.log(createdUser);
                 toast.success("User logged in successfully!!");
+                navigate("/")
             })
             .catch(error => {
                 toast.error(error.message);
