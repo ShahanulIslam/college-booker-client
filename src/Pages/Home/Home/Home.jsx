@@ -1,5 +1,6 @@
 import Banner from "../Banner/Banner";
 import CollegeCard from "../CollegeCard/CollegeCard";
+import Gallery from "../Gallery/Gallery";
 
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <CollegeCard></CollegeCard>
+            <Gallery></Gallery>
         </div>
     );
 };
